@@ -2,7 +2,7 @@
 
 ## Подключение библиотеки
 
-```
+```html
 <!DOCTYPE html>
 <html>
   <head>
