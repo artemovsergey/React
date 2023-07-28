@@ -78,5 +78,12 @@ http.createServer(function(request, response){
 });
 ```
 
+## Запуск сервера Node
+
+```cmd
+node app.js
+```
+
+
 
 
