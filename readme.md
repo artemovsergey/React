@@ -201,3 +201,7 @@ export default defineConfig({
   plugins: [react()],
 })
 ```
+
+# Next
+
+- nom install next
