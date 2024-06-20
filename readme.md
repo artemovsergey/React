@@ -1,6 +1,10 @@
 # Технический журнал React
 https://react.dev/
 
+# Create
+
+- npx create-react-app nameapp
+
 # Основа:
 - Jsx  Syntax
 - Components and Props
