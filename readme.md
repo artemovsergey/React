@@ -1,6 +1,13 @@
 # Технический журнал React
 https://react.dev/
 
+# Основа:
+- Jsx  Syntax
+- Components and Props
+- Handling Events
+- State Managment
+
+
 # package.json
 
 ```js
