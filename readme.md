@@ -116,6 +116,68 @@ function App() {
 export default App
 ```
 
+# Компонент Link и  NavLink
+
+```
+import { Link, NavLink } from 'react-router-dom';
+<Link to={`/user/${id}`}> User3</Link>
+<NavLink to="/header" style={({ isActive }) => ({ color: isActive ? 'green' : 'blue' })} >Header</NavLink> 
+```
+
+## Параметры маршрута и запроса
+
+```js
+import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+export default function User() {
+
+    // получаем параметры маршрута
+    const userId = useParams().id 
+    // получаем параметры строки запроса
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    return (
+            <div>
+                <h1> User с id = {userId} </h1>
+                <h1> Параметр запроса name:  {searchParams.get("name")}</h1>
+            </div>
+    )
+}
+```
+
+# Navigation
+
+```js
+import {useNavigate} from 'react-router-dom'
+function Users() {
+
+    const nav = useNavigate();
+    const id = 3;
+    return (
+        <>
+            <div>
+
+                <h1> Каталог пользователей новых еще каталог </h1> 
+
+                <button onClick={() => nav(`/user/${id}`)}>
+                  Пользователь 1
+                </button>
+
+            </div>
+        </>
+    )
+}
+export default Users
+```
+
+# .editorconfig
+
+```
+[*]
+charset = utf-8
+
+```
+
 # Props
 
 ```js
