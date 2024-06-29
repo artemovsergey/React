@@ -1,6 +1,7 @@
 # Технический журнал React
-https://react.dev/
-https://nextjs.org/
+
+- https://react.dev/
+- https://nextjs.org/
 
 # Create
 
