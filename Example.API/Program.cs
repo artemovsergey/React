@@ -1,4 +1,4 @@
-using Example.Application;
+ï»¿using Example.Application;
 using Example.Infrastructure;
 using Example.Application.Request;
 using MediatR;
@@ -6,6 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using Example.Infrastructure.Data;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.OpenApi;
+using Example.Domen.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -14,7 +20,7 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddSwaggerGen(c =>
 {
     c.EnableAnnotations();
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ïðèëîæåíèå", Version = "v2024" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ð¸", Version = "v2024" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "Authorization using jwt token. Example: \"Bearer {token}\"",
@@ -37,6 +43,7 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+builder.Services.AddCors();
 
 
 var app = builder.Build();
@@ -47,14 +54,16 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 
+app.UseCors(o => o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
 app.MapGet(UsersRequest.RouteTemplate,
 
+
 [Produces("application/json")]
-[Authorize(Roles = "Admin")]
 [HttpGet]
 [ProducesResponseType(StatusCodes.Status200OK)]
 [ProducesResponseType(StatusCodes.Status404NotFound)]
-[SwaggerOperation(Summary = "Ïîëó÷åíèå âñåõ ïîëüçîâàòåëåé")]
+[SwaggerOperation(Summary = "Ð’ÑÐµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ð¸")]
 [SwaggerResponse(StatusCodes.Status200OK, "Users successfully")]
 [SwaggerResponse(StatusCodes.Status404NotFound, "Users not found", typeof(ValidationProblemDetails))]
 
@@ -64,13 +73,77 @@ async (IMediator mediatr) =>
 
         if(response.users == null)
         {
-            return Results.NotFound("Íåò êîëëåêöèè");
+            return Results.NotFound("ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ð¸ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ñ‹");
         }
 
         return Results.Ok(response.users);
     
     })
-.WithName("Âñå ïîëüçîâàòåëè")
+.WithName("Ð’ÑÐµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ð¸")
 .WithOpenApi();
 
+app.MapUserEndpoints();
+
 app.Run();
+
+
+public static class UserEndpoints
+{
+	public static void MapUserEndpoints (this IEndpointRouteBuilder routes)
+    {
+        var group = routes.MapGroup("/api/User").WithTags(nameof(User));
+
+        group.MapGet("/", async (ExampleContext db) =>
+        {
+            return await db.Users.ToListAsync();
+        })
+        .WithName("GetAllUsers")
+        .WithOpenApi();
+
+        group.MapGet("/{id}", async Task<Results<Ok<User>, NotFound>> (int id, ExampleContext db) =>
+        {
+            return await db.Users.AsNoTracking()
+                .FirstOrDefaultAsync(model => model.Id == id)
+                is User model
+                    ? TypedResults.Ok(model)
+                    : TypedResults.NotFound();
+        })
+        .WithName("GetUserById")
+        .WithOpenApi();
+
+        group.MapPut("/{id}", async Task<Results<Ok, NotFound>> (int id, User user, ExampleContext db) =>
+        {
+            var affected = await db.Users
+                .Where(model => model.Id == id)
+                .ExecuteUpdateAsync(setters => setters
+                  .SetProperty(m => m.Name, user.Name)
+                  .SetProperty(m => m.Login, user.Login)
+                  .SetProperty(m => m.Password, user.Password)
+                  .SetProperty(m => m.RoleId, user.RoleId)
+                  .SetProperty(m => m.Id, user.Id)
+                  );
+            return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
+        })
+        .WithName("UpdateUser")
+        .WithOpenApi();
+
+        group.MapPost("/", async (User user, ExampleContext db) =>
+        {
+            db.Users.Add(user);
+            await db.SaveChangesAsync();
+            return TypedResults.Created($"/api/User/{user.Id}",user);
+        })
+        .WithName("CreateUser")
+        .WithOpenApi();
+
+        group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (int id, ExampleContext db) =>
+        {
+            var affected = await db.Users
+                .Where(model => model.Id == id)
+                .ExecuteDeleteAsync();
+            return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
+        })
+        .WithName("DeleteUser")
+        .WithOpenApi();
+    }
+}
