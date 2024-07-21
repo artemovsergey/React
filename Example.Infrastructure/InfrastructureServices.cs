@@ -9,13 +9,17 @@ public static class InfrastructureServices
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+
         // Add DbContext to the services
         services.AddDbContext<ExampleContext>(opts =>
         {
-            opts.UseNpgsql(configuration.GetConnectionString("PostgreSQL") ??
-                "Host=localhost;Port=5432;Database=Example;Username=postgres;Password=root");
+            opts.UseNpgsql(configuration.GetConnectionString("PostgreSQL"));
+
+            //opts.UseNpgsql(configuration.GetConnectionString("PostgreSQL") ??
+              //  "Host=localhost;Port=5432;Database=Example;Username=postgres;Password=root");
         });
 
+     
         // Register repositories and services
         //services.AddScoped<IUnitOfWork, UnitOfWork>();
         //services.AddScoped<IUserRepository, UserRepository>();

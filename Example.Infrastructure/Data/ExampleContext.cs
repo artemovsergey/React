@@ -9,6 +9,7 @@ public class ExampleContext : DbContext
 
     public DbSet<User> Users { get; set; }
 
+
     public ExampleContext(DbContextOptions<ExampleContext> opt) : base(opt)
     {
        Database.EnsureCreated(); 
