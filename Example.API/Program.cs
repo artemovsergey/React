@@ -45,6 +45,11 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddCors();
 
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.WriteIndented = true;
+});
+
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
