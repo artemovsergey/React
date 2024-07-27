@@ -4,7 +4,7 @@
 docker-compose build #--no-cache --pull
 
 # Получаем список сервисов из docker-compose.yml
-SERVICES=$(grep -oP '^\s*\K\w+' docker-compose.yml)
+SERVICES=$(grep -oP '^services:\n\s*|\n(?<=^services:\n\s*)\w+(?=\s*,|$)' docker-compose.yml)
 
 for SERVICE in ${SERVICES}; do
   echo "Building and pushing ${SERVICE}..."
