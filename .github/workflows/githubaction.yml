@@ -16,8 +16,7 @@ jobs:
         with:
           username: artik3314@gmail.com
           password: Aa003314+
-
       - name: Make script executable
-        run: chmod +x /../build_and_run.sh
+        run: chmod +x build_and_push.sh
       - name: Run script to build and push images
         run: ./build_and_push.sh
