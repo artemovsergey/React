@@ -1,6 +1,5 @@
 ﻿#!/bin/bash
 
-chmod +x "$0"
 # Собираем образы
 docker-compose build #--no-cache --pull
 
