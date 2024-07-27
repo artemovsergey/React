@@ -1,12 +1,16 @@
-# Use the standard Nginx image from Docker Hub
 FROM nginx:alpine
-# Copy the configuration file from the current directory and paste
-# it inside the container to use it as Nginx's default config.
-COPY ./loadbalancer/nginx.conf /etc/nginx/nginx.conf
-# Port 8080 of the container will be exposed and then mapped to port
-# 8080 of our host machine via Compose. This way we'll be able to
-# access the server via localhost:8080 on our host.
-EXPOSE 80
+RUN apk add --no-cache openssl
 
-# Start Nginx when the container has provisioned.
+# ������� ���������� ��� SSL ������������
+RUN mkdir -p /etc/nginx/ssl
+
+COPY ./certificate/localhost.crt /etc/nginx/ssl/localhost.crt
+COPY ./certificate/localhost.key /etc/nginx/ssl/localhost.key
+COPY ./certificate/localhost_full.crt /etc/nginx/ssl/localhost_full.crt
+
+#RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx-selfsigned.key -out /etc/nginx/ssl/nginx-selfsigned.crt -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=localhost"
+#RUN openssl req -x509 -newkey rsa:4096 -keyout localhost.key -out localhost.crt -days 365 -nodes
+
+COPY ./loadbalancer/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]
