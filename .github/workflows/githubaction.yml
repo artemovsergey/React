@@ -14,17 +14,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: artik3314@gmail.com
-          password: Aa003314+
-
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./docker-compose.yml
-          load: true
-          push: true
-          tags: your-dockerhub-username/your-repo-name:latest
+      
