@@ -10,6 +10,10 @@
     <DockerServiceName>api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="docker-compose-prodaction.override.yml">
+      <DependentUpon>docker-compose-prodaction.yml</DependentUpon>
+    </None>
+    <None Include="docker-compose-prodaction.yml" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>

@@ -1,6 +1,6 @@
 ﻿#!/bin/bash
 echo "Build images from compose"
-docker-compose build #--no-cache --pull
+docker-compose build --no-cache --pull
 
 echo "Login to dockerhub: "
 docker login -u artik3314 -p Aa003314+ docker.io

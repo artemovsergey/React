@@ -26,7 +26,8 @@ RUN dotnet publish "./Example.API.csproj" -c $BUILD_CONFIGURATION -o /app/publis
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-#COPY ./Example.API/2.pfx /app/certificates/
-
+COPY ./certificate/localhost_full.pem /app/certificate/localhost_full.pem
+COPY ./certificate/localhost.key /app/certificate/localhost.key
+COPY ./certificate/localhost.pfx /app/certificate/localhost.pfx
 
 ENTRYPOINT ["dotnet", "Example.API.dll"]

@@ -1,4 +1,5 @@
-﻿using Example.Application;
+﻿using System.Security.Cryptography.X509Certificates;
+using Example.Application;
 using Example.Infrastructure;
 using Example.Application.Request;
 using MediatR;
@@ -14,6 +15,19 @@ using Example.Domen.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+// var certificate = new X509Certificate2("./certificate/localhost_full.pem"); // Загрузка сертификата
+//
+// builder.WebHost.UseKestrel(options =>
+// {
+//     options.ConfigureHttpsDefaults(httpsOptions =>
+//     {
+//         httpsOptions.ServerCertificate = certificate; // Настройка сертификата для Kestrel
+//     });
+// });
+
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -52,6 +66,8 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 
 var app = builder.Build();
+
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
