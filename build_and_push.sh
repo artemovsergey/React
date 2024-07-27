@@ -12,5 +12,5 @@ docker images
 
 echo "Push service: "
 
-docker tag example react_nginx:latest
+docker tag react react_nginx:latest
 docker push react_nginx:latest
