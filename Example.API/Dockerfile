@@ -29,5 +29,5 @@ COPY --from=publish /app/publish .
 COPY ./certificate/localhost_full.pem /app/certificate/localhost_full.pem
 COPY ./certificate/localhost.key /app/certificate/localhost.key
 COPY ./certificate/localhost.pfx /app/certificate/localhost.pfx
-
+COPY ./Example.API/appsettings.json /app/appsettings.json
 ENTRYPOINT ["dotnet", "Example.API.dll"]
