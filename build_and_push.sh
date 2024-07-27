@@ -1,7 +1,7 @@
 ﻿#!/bin/bash
 
 # Собираем образы
-docker-compose build --no-cache --pull
+docker-compose build #--no-cache --pull
 
 echo "Login to dockerhub: "
 
@@ -12,4 +12,5 @@ docker images
 
 echo "Push service: "
 
+docker tag example react_nginx:latest
 docker push react_nginx:latest
