@@ -1,4 +1,4 @@
-version: '1.25'
+version: '3.0'
 
 networks:
   asp-dotnet-network:
