@@ -17,11 +17,5 @@ jobs:
           username: artik3314@gmail.com
           password: Aa003314+
 
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Configure Docker CLI
-        run: echo "${{ secrets.DOCKER_HUB_USERNAME }}" | docker login -u $DOCKER_HUB_USERNAME --password-stdin
-
       - name: Run script to build and push images
         run: ./build_and_push.sh
