@@ -10,5 +10,5 @@ docker login -u artik3314 -p Aa003314+
 
 echo "Push service: "
 
-docker tag nginx example/nginx:tag
-docker push example/nginx:latest
+docker tag nginx example-nginx:tag
+docker push example-nginx:latest
