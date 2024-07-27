@@ -1,6 +1,6 @@
 # Технический журнал React
 
-- test 1232
+- test 12324
 
 - https://react.dev/
 - https://nextjs.org/
