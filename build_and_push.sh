@@ -18,5 +18,5 @@ docker push artik3314/react_nginx:latest
 
 echo "Push service Angular: "
 
-docker tag angular artik3314/react_angular:latest
+docker tag react_angular artik3314/react_angular:latest
 docker push artik3314/react_angular:latest
