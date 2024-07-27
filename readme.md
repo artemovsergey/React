@@ -1,6 +1,6 @@
 # Технический журнал React
 
-- test Build and push
+- test
 
 - https://react.dev/
 - https://nextjs.org/
