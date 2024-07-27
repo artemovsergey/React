@@ -1,4 +1,4 @@
-version: '2.2'
+version: '1.25'
 
 services:
   api:
