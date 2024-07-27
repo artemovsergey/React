@@ -58,15 +58,15 @@ services:
       context: .
       dockerfile: Example.Angular/Dockerfile
 
-    develop:
-      watch:
-        - action: sync
-          path: ./Example.Angular/src
-          target: /app/src
-          ignore:
-            - node_modules/
-        - action: rebuild
-          path: package.json
+#    develop:
+#      watch:
+#        - action: sync
+#          path: ./Example.Angular/src
+#          target: /app/src
+#          ignore:
+#            - node_modules/
+#        - action: rebuild
+#          path: package.json
 
     environment:
       - Production
