@@ -13,4 +13,4 @@ docker images
 
 echo "Push service: "
 
-#docker push example-nginx:latest
+docker push react_nginx:latest
