@@ -1,7 +1,7 @@
 ﻿#!/bin/bash
 
 # Собираем образы
-docker-compose build #--no-cache --pull
+docker-compose build --no-cache --pull
 
 echo "Login to dockerhub: "
 
