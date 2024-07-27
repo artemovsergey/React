@@ -1,6 +1,6 @@
 # Технический журнал React
 
-- test Setup Docker Buildx
+- test Build and push
 
 - https://react.dev/
 - https://nextjs.org/
