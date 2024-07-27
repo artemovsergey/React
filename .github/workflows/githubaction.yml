@@ -18,6 +18,6 @@ jobs:
           password: Aa003314+
 
       - name: Make script executable
-        run: chmod 777 build_and_run.sh
+        run: chmod +x build_and_run.sh
       - name: Run script to build and push images
         run: ./build_and_push.sh
