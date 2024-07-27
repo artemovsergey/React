@@ -5,8 +5,9 @@ docker-compose build --no-cache --pull
 
 echo "Login to dockerhub: "
 
-docker login -u artik3314 -p Aa003314+
-#docker tag $SERVICE artik3314/$SERVICE:latest
+export USERNAME=$USERNAME
+export PASSWORD=$PASSWORD
+docker login -u $USERNAME -p $PASSWORD
 
 echo "Images"
 docker images
