@@ -38,4 +38,5 @@ jobs:
                 docker-compose -f docker-compose-production.yml down
                 docker-compose -f docker-compose-production.yml pull
                 docker-compose -f docker-compose-production.yml up --build
+                sleep 10
                 docker ps
