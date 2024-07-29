@@ -20,3 +20,12 @@ jobs:
         run: chmod +x build_and_push.sh
       - name: Run script to build and push images
         run: ./build_and_push.sh
+
+      - name: Connect to VPS via SSH and execute command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY_BASE64 }}
+          script: |
+            sudo docker ps
