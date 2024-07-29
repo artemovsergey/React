@@ -11,17 +11,6 @@ docker-compose -f docker-compose-production.yml pull
 echo "Поднятие контейнеров"
 docker-compose -f docker-compose-production.yml up -d --build
 
-
-# Проверяем статус контейнеров
-while true; do
-    CONTAINER_STATUS=$(docker inspect -f '{{json .State.Status}}' ContainerPgAdmin)
-    if [[ "$CONTAINER_STATUS" == "\"running\"" ]]; then
-        break
-    fi
-    sleep 1
-done
-
-
 docker ps
 
 
