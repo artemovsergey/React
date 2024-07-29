@@ -9,6 +9,9 @@ jobs:
 
     steps:
 
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Delete old repository from VPS
         uses: appleboy/ssh-action@master
         with:
