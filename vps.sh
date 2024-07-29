@@ -9,7 +9,7 @@ echo "Update new version images"
 docker-compose -f docker-compose-production.yml pull
 
 echo "Поднятие контейнеров"
-docker-compose -f docker-compose-production.yml -d up --build
+docker-compose -f docker-compose-production.yml up -d --build
 
 
 # Проверяем статус контейнеров
