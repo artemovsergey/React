@@ -36,6 +36,5 @@ jobs:
               script: |
                 cd /home/artik3314/project/
                 docker-compose -f docker-compose-production.yml down
-                docker system prune -a -f
                 docker-compose -f docker-compose-production.yml pull
                 docker-compose -f docker-compose-production.yml up --build
