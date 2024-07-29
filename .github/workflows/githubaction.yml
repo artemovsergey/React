@@ -43,4 +43,5 @@ jobs:
               username: ${{ secrets.VPS_USERNAME }}
               key: ${{ secrets.SSH_PRIVATE_KEY }}
               script: |
+                chmod +x /home/artik3314/project/vps.sh
                 /home/artik3314/project/vps.sh
