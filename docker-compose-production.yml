@@ -55,20 +55,6 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - asp-dotnet-network
-  pgadmin:
-    container_name: ContainerPgAdmin
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
-    volumes:
-      - postgres_data:/var/lib/postgresql/dbadmin
-    ports:
-      - "5050:80"
-    networks:
-      - asp-dotnet-network 
-
 volumes:
     postgres_data:
       

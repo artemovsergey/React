@@ -1,7 +1,7 @@
 FROM nginx:alpine
 RUN apk add --no-cache openssl
 
-# ������� ���������� ��� SSL ������������
+# SSL
 RUN mkdir -p /etc/nginx/ssl
 
 COPY ./certificate/localhost.crt /etc/nginx/ssl/localhost.crt
