@@ -4,6 +4,10 @@ RUN apk add --no-cache openssl
 # SSL
 RUN mkdir -p /etc/nginx/ssl
 
+
+COPY ./certificate/asvapp.crt /etc/nginx/ssl/asvapp.crt
+COPY ./certificate/asvapp.key /etc/nginx/ssl/asvapp.key
+
 COPY ./certificate/localhost.crt /etc/nginx/ssl/localhost.crt
 COPY ./certificate/localhost.key /etc/nginx/ssl/localhost.key
 COPY ./certificate/localhost_full.crt /etc/nginx/ssl/localhost_full.crt
